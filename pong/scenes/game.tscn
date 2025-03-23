@@ -1,0 +1,220 @@
+[gd_scene load_steps=9 format=3 uid="uid://vcb0cauljb8b"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_a4f0u"]
+[ext_resource type="Texture2D" uid="uid://da40hk3r0tb7y" path="res://assets/separator.png" id="2_4k4rt"]
+[ext_resource type="PackedScene" uid="uid://cx0urvumgg0t7" path="res://scenes/player.tscn" id="3_nd0iq"]
+[ext_resource type="PackedScene" uid="uid://do6eumpjn6hu" path="res://scenes/ball.tscn" id="4_5p630"]
+[ext_resource type="AudioStream" uid="uid://dk2nu4dcq4oiu" path="res://sounds/06_cursor2.wav" id="5_daoyj"]
+[ext_resource type="AudioStream" uid="uid://b8uqr7grnk7b5" path="res://sounds/07_pause1.wav" id="6_amxka"]
+[ext_resource type="AudioStream" uid="uid://dake4ba2s4e2e" path="res://sounds/32_error.wav" id="7_5cb84"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a2vwi"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_a4f0u")
+
+[node name="separator" type="Sprite2D" parent="."]
+scale = Vector2(1.62, 1.62)
+texture = ExtResource("2_4k4rt")
+
+[node name="P1" parent="." instance=ExtResource("3_nd0iq")]
+position = Vector2(-556, 0)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ball" parent="." instance=ExtResource("4_5p630")]
+position = Vector2(1, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 575.0
+offset_bottom = 325.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -141.0
+offset_top = 21.0
+offset_right = -101.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "1
+"
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0172628, 0.00406862, 0.160949, 1)
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 91.0
+offset_top = 21.0
+offset_right = 131.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "1
+"
+
+[node name="PauseButton" type="Button" parent="Control"]
+layout_mode = 0
+anchor_left = 0.895652
+anchor_top = 0.0538462
+anchor_right = 0.928696
+anchor_bottom = 0.115385
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+text = "||"
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.0
+offset_top = -281.0
+offset_right = 348.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a2vwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/PauseMenu"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/margin_top = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PauseMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="Control/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "PAUSE?!"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Continue" type="Button" parent="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Continue"
+
+[node name="Title" type="Button" parent="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Return to Title"
+
+[node name="Exit" type="Button" parent="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="EndMenu" type="PanelContainer" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -348.0
+offset_top = -281.0
+offset_right = 348.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a2vwi")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/EndMenu"]
+z_index = 1
+layout_mode = 2
+theme_override_constants/margin_top = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/EndMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 50
+
+[node name="Wins" type="Label" parent="Control/EndMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+text = "Wins"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/EndMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Restart" type="Button" parent="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Restart"
+
+[node name="Title" type="Button" parent="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Return to Title"
+
+[node name="Exit" type="Button" parent="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Bonk" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("5_daoyj")
+
+[node name="Pause" type="AudioStreamPlayer2D" parent="Sounds"]
+process_mode = 3
+stream = ExtResource("6_amxka")
+
+[node name="Goal" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("7_5cb84")
+
+[connection signal="pressed" from="Control/PauseButton" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Control/PauseMenu/MarginContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Control/EndMenu/MarginContainer/VBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

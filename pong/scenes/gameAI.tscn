@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://w470ijvsn4no"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_nov8m"]
+[ext_resource type="Texture2D" uid="uid://da40hk3r0tb7y" path="res://assets/separator.png" id="2_x6hou"]
+[ext_resource type="PackedScene" uid="uid://cx0urvumgg0t7" path="res://scenes/player.tscn" id="3_x12eq"]
+[ext_resource type="PackedScene" uid="uid://do6eumpjn6hu" path="res://scenes/ball.tscn" id="4_8fftp"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_nov8m")
+
+[node name="separator" type="Sprite2D" parent="."]
+scale = Vector2(1.62, 1.62)
+texture = ExtResource("2_x6hou")
+
+[node name="P1" parent="." instance=ExtResource("3_x12eq")]
+position = Vector2(-556, 0)
+
+[node name="P2" parent="." instance=ExtResource("3_x12eq")]
+position = Vector2(556, 0)
+player_color = Color(0.90332, 0.124535, 0.160684, 1)
+up_key = "ui_up"
+down_key = "ui_down"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="ball" parent="." instance=ExtResource("4_8fftp")]
+position = Vector2(1, 0)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -575.0
+offset_top = -325.0
+offset_right = 575.0
+offset_bottom = 325.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -141.0
+offset_top = 21.0
+offset_right = -101.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "1
+"
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0172628, 0.00406862, 0.160949, 1)
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 91.0
+offset_top = 21.0
+offset_right = 131.0
+offset_bottom = 117.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 70
+text = "1
+"

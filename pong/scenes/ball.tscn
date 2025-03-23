@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://do6eumpjn6hu"]
+
+[ext_resource type="Texture2D" uid="uid://b7hfi5ns7xt7x" path="res://assets/ball.png" id="1_7wr64"]
+[ext_resource type="Script" path="res://scenes/ball.gd" id="1_thqsy"]
+
+[node name="ball" type="CharacterBody2D"]
+position = Vector2(7, 0)
+script = ExtResource("1_thqsy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.90234, 2.90234)
+texture = ExtResource("1_7wr64")
+
+[node name="Area2D" type="Area2D" parent="." groups=["ball"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(2.90234, 2.90234)
+polygon = PackedVector2Array(-4, 4, -4, -4, 4, -4, 4, 4)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
