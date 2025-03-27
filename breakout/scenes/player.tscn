@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://p383lnd3jifu"]
+
+[ext_resource type="Texture2D" uid="uid://crbdnt07djtso" path="res://assets/paddle.png" id="1_15w28"]
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_byhg2"]
+
+[node name="P1" type="CharacterBody2D"]
+rotation = 1.5708
+script = ExtResource("1_byhg2")
+player_color = Color(0.898039, 0, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 4.72203)
+texture = ExtResource("1_15w28")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["player"]]
+scale = Vector2(1.989, 4.722)
+polygon = PackedVector2Array(-4, 16, -4, -16, 4, -16, 4, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D" groups=["player"]]
+scale = Vector2(1.996, 4.722)
+polygon = PackedVector2Array(-4, 16, -4, -16, 4, -16, 4, 16)

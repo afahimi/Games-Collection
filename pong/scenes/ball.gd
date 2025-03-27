@@ -14,7 +14,7 @@ func _ready() -> void:
 	var x_options = [-1, 1]
 	var x_selected = x_options[rng.randi() % x_options.size()]
 	
-	var y_selected = sin(rng.randf_range(PI/16, PI/8))
+	var y_selected = sin(rng.randf_range(PI/16 , PI/8))
 	
 	var y_sign_options = [-1, 1]
 	var y_sign_selected = y_sign_options[rng.randi() % y_sign_options.size()]

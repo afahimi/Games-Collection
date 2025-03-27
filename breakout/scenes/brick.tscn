@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlmghnynrp303"]
+
+[ext_resource type="Script" path="res://scenes/brick.gd" id="1_5pn7v"]
+[ext_resource type="Texture2D" uid="uid://cklqltnx0nwhs" path="res://assets/block.png" id="1_lrvov"]
+
+[node name="Area2D" type="Area2D" groups=["brick"]]
+script = ExtResource("1_5pn7v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("1_lrvov")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.063, 0.063)
+polygon = PackedVector2Array(-600, 279.5, -600, -279.5, 600, -279.5, 600, 279.5)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

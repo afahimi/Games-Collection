@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=3 uid="uid://1u0ofm4sbn7k"]
+
+[ext_resource type="PackedScene" uid="uid://p383lnd3jifu" path="res://scenes/player.tscn" id="1_fypf8"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_tyuih"]
+[ext_resource type="PackedScene" uid="uid://dcwxf53gypv0c" path="res://scenes/ball.tscn" id="2_y7dou"]
+[ext_resource type="Script" path="res://scenes/high_score.gd" id="3_1f3yk"]
+[ext_resource type="Script" path="res://scenes/brick.gd" id="4_ic6et"]
+[ext_resource type="Texture2D" uid="uid://cklqltnx0nwhs" path="res://assets/block.png" id="5_vj3kb"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_tyuih")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_fypf8")]
+position = Vector2(0, 290)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -14.425
+anchor_top = -8.125
+anchor_right = 14.425
+anchor_bottom = 8.125
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 4.75
+anchor_top = -7.575
+anchor_right = 9.025
+anchor_bottom = -6.2
+theme_override_font_sizes/font_size = 40
+text = "SCORE: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="High Score" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -440.0
+offset_top = -308.0
+offset_right = -157.0
+offset_bottom = -236.0
+theme_override_font_sizes/font_size = 40
+text = "HIGH SCORE: 0"
+script = ExtResource("3_1f3yk")
+
+[node name="Ball" parent="." groups=["ball"] instance=ExtResource("2_y7dou")]
+position = Vector2(0, 125)
+
+[node name="Brick" type="Area2D" parent="." groups=["brick"]]
+visible = false
+position = Vector2(0.07, -150.13)
+script = ExtResource("4_ic6et")
+
+[node name="Sprite2D" type="Sprite2D" parent="Brick"]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("5_vj3kb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Brick"]
+position = Vector2(-3.8147e-06, 0)
+scale = Vector2(0.063, 0.063)
+polygon = PackedVector2Array(-600, 279.5, -600, -279.5, 600, -279.5, 600, 279.5)
+
+[connection signal="area_entered" from="Brick" to="Brick" method="_on_area_entered"]
