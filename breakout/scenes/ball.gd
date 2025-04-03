@@ -90,6 +90,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		area.queue_free()
 		
 		# Set a short cooldown to prevent multiple hits
-		hit_cooldown = 0.025
+		hit_cooldown = 0.0125
 		
 		get_parent().on_brick_destroyed()
