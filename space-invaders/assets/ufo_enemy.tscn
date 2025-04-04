@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://jbh055okjalt"]
+
+[ext_resource type="Script" path="res://assets/ufo_enemy.gd" id="1_3uij0"]
+[ext_resource type="Texture2D" uid="uid://ce0fekb5twhra" path="res://assets/inavder.png" id="1_du206"]
+
+[node name="UFOEnemy" type="CharacterBody2D"]
+script = ExtResource("1_3uij0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_du206")
+region_enabled = true
+region_rect = Rect2(21.5, 154.25, 84, 41.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-15, -15.75, -38, 2.25, -39, 2.25, -37, 8.25, -37, 9.25, -29, 9.25, -24, 15.25, -24, 16.25, -19, 16.25, -14, 11.25, -14, 9.25, -8, 9.25, -6, 12.25, -6, 13.25, 7, 13.25, 9, 9.25, 15, 9.25, 20, 16.25, 25, 16.25, 30, 11.25, 30, 9.25, 39, 7.25, 40, 7.25, 38, 1.25, 38, 0.25, 16, -15.75, 16, -16.75, -15, -16.75)
+
+[node name="Area2D" type="Area2D" parent="." groups=["ufo enemy"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-15, -15.75, -38, 2.25, -39, 2.25, -37, 8.25, -37, 9.25, -29, 9.25, -24, 15.25, -24, 16.25, -19, 16.25, -14, 11.25, -14, 9.25, -8, 9.25, -6, 12.25, -6, 13.25, 7, 13.25, 9, 9.25, 15, 9.25, 20, 16.25, 25, 16.25, 30, 11.25, 30, 9.25, 39, 7.25, 40, 7.25, 38, 1.25, 38, 0.25, 16, -15.75, 16, -16.75, -15, -16.75)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

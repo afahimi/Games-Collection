@@ -16,5 +16,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.get_name() == "EnemyBullet":
+	if area.get_parent().get_name() != "Player":
 		self.queue_free()

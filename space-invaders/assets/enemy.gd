@@ -25,5 +25,17 @@ func init_random_interval():
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.get_name() == "PlayerBullet":
+		var game = self.get_node("../../")
+		game._increment_score(_get_desired_score())
+		
 		area.queue_free()
 		self.queue_free()
+
+func _get_desired_score():
+	if enemy_type == "blue":
+		return 10
+	elif enemy_type == "green":
+		return 20
+	else:
+		return 30
+		
