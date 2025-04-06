@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://nyar8pib6dfl"]
+
+[ext_resource type="Texture2D" uid="uid://ckn5am7tnvme6" path="res://assets/spaceship.png" id="1_evfuy"]
+[ext_resource type="Script" path="res://assets/toilet.gd" id="1_od0np"]
+
+[sub_resource type="Animation" id="Animation_85pwn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_ymlyx"]
+resource_name = "Loop"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_ejsty"]
+resource_name = "Deploy"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer:speed_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwdbt"]
+_data = {
+"Deploy": SubResource("Animation_ejsty"),
+"Loop": SubResource("Animation_ymlyx"),
+"RESET": SubResource("Animation_85pwn")
+}
+
+[node name="Toilet" type="CharacterBody2D"]
+scale = Vector2(1.3, 1.3)
+script = ExtResource("1_od0np")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.125003, 0.148156)
+scale = Vector2(3.5, 3.5)
+texture = ExtResource("1_evfuy")
+hframes = 9
+region_rect = Rect2(0, 0, 27.9936, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wwdbt")
+}
+speed_scale = 2.0

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy7pwk5nqyx5e"]
+
+[ext_resource type="PackedScene" uid="uid://nyar8pib6dfl" path="res://assets/toilet.tscn" id="1_kpcsd"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Toilet" parent="." instance=ExtResource("1_kpcsd")]
+position = Vector2(-413, -236)
+
+[node name="Camera2D" type="Camera2D" parent="."]
