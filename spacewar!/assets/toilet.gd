@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
+var POO = preload("res://assets/poo.tscn")
+
 const SPEED = 300.0
 const ROTATION_SPEED = 3.0  # Rotation speed in radians per second
 const THRUST_FORCE = 500.0  # Force applied when shooting forward
+const GRAVITY_SPEED = 0.1
 
 func _ready():
 	# Connect the signal once at initialization
@@ -35,6 +38,16 @@ func _physics_process(delta: float) -> void:
 		# Apply force in that direction
 		velocity += direction * THRUST_FORCE * delta
 	
+	velocity += _get_gravity_vec() * GRAVITY_SPEED * delta
+	
+	# Handle bullets
+	if Input.is_action_just_pressed("ui_down") and not get_parent().has_node("poopy pants"):
+		var bullet = POO.instantiate()
+		bullet.position = position
+		bullet.direction = Vector2.RIGHT.rotated(rotation)
+		bullet.name = "poopy pants"
+		get_parent().add_child(bullet)
+	
 	# Apply friction/drag to gradually slow down
 	velocity = velocity.lerp(Vector2.ZERO, 0.01)
 	
@@ -42,18 +55,14 @@ func _physics_process(delta: float) -> void:
 	
 	# Check if character is at or beyond boundaries
 	if position.x <= -viewport_size.x / 2:
-		position.x = -viewport_size.x / 2
-		velocity.x = max(0, velocity.x)  # Only allow moving right
-	elif position.x >= viewport_size.x / 2:
 		position.x = viewport_size.x / 2
-		velocity.x = min(0, velocity.x)  # Only allow moving left
-		
+	elif position.x >= viewport_size.x / 2:
+		position.x = -viewport_size.x / 2
+	
 	if position.y <= -viewport_size.y / 2:
-		position.y = -viewport_size.y / 2
-		velocity.y = max(0, velocity.y)  # Only allow moving down
-	elif position.y >= viewport_size.y / 2:
 		position.y = viewport_size.y / 2
-		velocity.y = min(0, velocity.y)  # Only allow moving up
+	elif position.y >= viewport_size.y / 2:
+		position.y = -viewport_size.y / 2
 	
 	# Move the character
 	move_and_slide()
@@ -68,4 +77,7 @@ func _on_animation_finished(anim_name: String):
 		$AnimationPlayer.play("Deploy")
 		$AnimationPlayer.seek(0.0, true)
 		$AnimationPlayer.stop()
+	
+func _get_gravity_vec():
+	return Vector2(0, 0) - position
 		
